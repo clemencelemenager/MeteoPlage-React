@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,400;0,600;1,400&display=swap');
+
+// colors
+$color-primary: #44BBA4;
+$color-alternative: #3F88C5;
+$color-dark: #393E41;
+$color-light: #F6F7EB;
+$color-warning: #F3CA40;
+$color-alert: #E94F3780;
+
+// spacing
+$gutter: 1em;
+
+// text
+$fontText: 'Nunito', sans-serif;
+$fontTitle: 'Nunito', sans-serif;
+$fontColor: #333;
+$sizeText: 14px;
+$sizeTitle: 32px;
+
+// Border radius
+$buttonRadius: 10px;
+
+// breaking points responsive
+$minWidthPhone: 576px;
+$minWidthTablet: 768px;
+$minWidthDesktop: 992px;
+$minWidthLargeDesktop: 1200px;
+

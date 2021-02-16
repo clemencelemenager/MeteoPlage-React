@@ -1,0 +1,12 @@
+@use 'src/styles/_vars';
+
+.location {
+  text-align: center;
+  font-weight: bold;
+  margin: vars.$gutter/2;
+  font-family: vars.$fontTitle;
+  font-size: vars.$sizeTitle;
+  i {
+    padding-right: vars.$gutter/2;
+  }
+}

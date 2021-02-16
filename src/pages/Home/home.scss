@@ -1,0 +1,15 @@
+@use 'src/styles/_vars';
+
+.home {
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(50px, auto);
+    grid-gap: vars.$gutter;
+
+    // For Tablets & up
+    @media (min-width: vars.$minWidthTablet) {
+    }
+  }
+
+}
