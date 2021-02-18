@@ -12,7 +12,9 @@ const weatherMiddleware = (store) => (next) => (action) => {
     latitude,
     longitude,
   } = store.getState().settings;
-  const openWeatherMapApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lang=fr&lat=${latitude}&lon=${longitude}&units=metric&appid=${process.env.REACT_APP_API_OPENWEATHERMAP_KEY}`;
+  // eslint-disable-next-line no-undef
+  const apiKeyOpenWeatherMap = REACT_APP_API_OPENWEATHERMAP_KEY;
+  const openWeatherMapApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lang=fr&lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKeyOpenWeatherMap}`;
 
   switch (action.type) {
     case FETCH_WEATHER: {

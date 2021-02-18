@@ -27,7 +27,8 @@ const marineWeatherMiddleware = (store) => (next) => (action) => {
         cache: 'no-cache',
         url: `${openStormGlassApiUrl}`,
         headers: {
-          Authorization: `${process.env.REACT_APP_API_STORMGLASS_KEY}`,
+          // eslint-disable-next-line no-undef
+          Authorization: `${REACT_APP_API_STORMGLASS_KEY}`,
         },
       })
         .then((response) => {
