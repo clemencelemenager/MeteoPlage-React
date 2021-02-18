@@ -35,3 +35,7 @@ Paste your API keys in the file `.env.example` and rename it `.env`.
 If you do not have API keys or if you reached the number of requests included in free plan, you can use the project in a demo mode with sample data instead of API data.
 
 To activate demo mode, set `true` to state `displaySampleData` in the following file : `src/reducers/settingsReducer`.
+
+### Netlify
+
+Environnement variables are set in Netlify UI instead of `.env` file.
