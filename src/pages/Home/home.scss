@@ -9,6 +9,15 @@
 
     // For Tablets & up
     @media (min-width: vars.$minWidthTablet) {
+      grid-template-columns: repeat(8, 1fr);
+    }
+    @media (min-width: vars.$minWidthDesktop) {
+      grid-template-columns: repeat(8, 1fr);
+      width: 90%;
+      margin: auto;
+    }
+    @media (min-width: vars.$minWidthLargeDesktop) {
+      width: 70%;
     }
   }
 
