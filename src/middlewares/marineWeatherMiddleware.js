@@ -12,24 +12,13 @@ const marineWeatherMiddleware = (store) => (next) => (action) => {
     latitude,
     longitude,
   } = store.getState().settings;
-  const data = [
-    'gust', 'windDirection', 'windSpeed',
-    'waterTemperature', 'waveHeight',
-  ].join(',');
-  const source = 'sg';
-  const openStormGlassApiUrl = `https://api.stormglass.io/v2/weather/point?source=${source}&lat=${latitude}&lng=${longitude}&params=${data}`;
+
+  /** Netlify function to fetch marine weather for requested position */
+  const fetchMarineWeatherUrl = `/.netlify/functions/fetchMarineWeather?latitude=${latitude}&longitude=${longitude}`;
 
   switch (action.type) {
     case FETCH_MARINE_WEATHER: {
-      axios({
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        url: `${openStormGlassApiUrl}`,
-        headers: {
-          Authorization: `${process.env.REACT_APP_API_STORMGLASS_KEY}`,
-        },
-      })
+      axios.get(`${fetchMarineWeatherUrl}`)
         .then((response) => {
           // console.log(response.data);
           store.dispatch(saveMarineWeather(response.data.hours));
