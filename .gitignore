@@ -7,3 +7,6 @@ Thumbs.db
 yarn-error.log
 
 .env
+
+# Local Netlify folder
+.netlify

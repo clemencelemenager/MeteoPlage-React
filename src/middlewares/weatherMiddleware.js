@@ -12,13 +12,13 @@ const weatherMiddleware = (store) => (next) => (action) => {
     latitude,
     longitude,
   } = store.getState().settings;
-  // eslint-disable-next-line no-undef
-  const apiKeyOpenWeatherMap = REACT_APP_API_OPENWEATHERMAP_KEY;
-  const openWeatherMapApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lang=fr&lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKeyOpenWeatherMap}`;
+
+  /** Netlify function to fetch weather for requested position */
+  const fetchWeatherUrl = `/.netlify/functions/fetchWeather?latitude=${latitude}&longitude=${longitude}`;
 
   switch (action.type) {
     case FETCH_WEATHER: {
-      axios.get(`${openWeatherMapApiUrl}`)
+      axios.get(`${fetchWeatherUrl}`)
         .then((response) => {
           // console.log(response.data);
           store.dispatch(saveWeather(response.data));
