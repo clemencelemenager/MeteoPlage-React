@@ -2,27 +2,39 @@
 
 ## 1. Install
 
-Install dependancies :
+### 1.1. Install dependancies
 
 ```shell
 yarn
 ```
 
-Launch server :
+### 1.2. Install Netlify-cli
+
+It will be necessary to launch netlify dev server.
 
 ```shell
-yarn start --open
+npm install netlify-cli -g
 ```
 
-## 2. Set API
+### 1.3. Launch Netlify dev server
+
+```shell
+netlify dev
+```
+
+> Netlify dev server is necessary because API to collect weather data are managed through serverless functions in Netlify.
+
+> Be sure to be logged-in to Netlify and have a link to a Netlify project (command `netlify link`)
+
+## 2. Set API keys
+
+Paste your API keys in the file `.env.example` and rename it `.env`.
 
 The following API are used in this web application :
 
 - **Open Weather Map** : weather icon and description, temperature | [API Documentation](https://openweathermap.org/api/one-call-api)
 - **Tides** : timetable for tides, not to use for navigational purpose | [API Documentation](https://rapidapi.com/apihood/api/tides/endpoints)
 - **StormGlass** : marine weather (wind, sea temperature, wave height) | [API Documentation](https://docs.stormglass.io/#/weather)
-
-Paste your API keys in the file `.env.example` and rename it `.env`.
 
 > Information about number of requests included in free plans :
 >
@@ -36,6 +48,6 @@ If you do not have API keys or if you reached the number of requests included in
 
 To activate demo mode, set `true` to state `displaySampleData` in the following file : `src/reducers/settingsReducer`.
 
-### Netlify
+### When deploying on Netlify
 
-Environnement variables are set in Netlify UI instead of `.env` file.
+Set your API keys as environnement variables in Netlify UI.
