@@ -17,7 +17,7 @@ const handler = async (event) => {
 
   /** Launch request */
   try {
-    const { response } = await axios({
+    const { data } = await axios({
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',
@@ -28,7 +28,7 @@ const handler = async (event) => {
     });
     return {
       statusCode: 200,
-      body: JSON.stringify(response),
+      body: JSON.stringify(data),
     };
   }
   catch (error) {
