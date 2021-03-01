@@ -21,6 +21,7 @@ import {
 import { stopLoading } from 'src/actions/settings';
 import { fetchWeather } from 'src/actions/weather';
 import { fetchMarineWeather } from 'src/actions/marineWeather';
+import { fetchTides } from 'src/actions/tides';
 
 const mapStateToProps = (state) => ({
   displaySampleData: state.settings.displaySampleData,
@@ -46,6 +47,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   fetchMarineWeather: () => {
     dispatch(fetchMarineWeather());
+  },
+  fetchTides: () => {
+    dispatch(fetchTides());
   },
   stopLoading: () => {
     dispatch(stopLoading());

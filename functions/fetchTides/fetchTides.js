@@ -6,14 +6,9 @@ const handler = async (event) => {
   /** Get parameters */
   const { latitude, longitude } = event.queryStringParameters;
   /** Get secret api key */
-  const { REACT_APP_API_STORMGLASS_KEY } = process.env;
+  const { REACT_APP_API_TIDES_KEY } = process.env;
   /** Set endpoint for axios request */
-  const dataToCollect = [
-    'gust', 'windDirection', 'windSpeed',
-    'waterTemperature', 'waveHeight',
-  ].join(',');
-  const source = 'sg';
-  const stormGlassApiUrl = `https://api.stormglass.io/v2/weather/point?source=${source}&lat=${latitude}&lng=${longitude}&params=${dataToCollect}`;
+  const tidesUrl = `https://tides.p.rapidapi.com/tides?latitude=${latitude}&longitude=${longitude}&interval=60&duration=1440&radius=10`;
 
   /** Launch request */
   try {
@@ -21,9 +16,10 @@ const handler = async (event) => {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',
-      url: `${stormGlassApiUrl}`,
+      url: `${tidesUrl}`,
       headers: {
-        Authorization: `${REACT_APP_API_STORMGLASS_KEY}`,
+        'x-rapidapi-key': `${REACT_APP_API_TIDES_KEY}`,
+        'x-rapidapi-host': 'tides.p.rapidapi.com',
       },
     });
     return {

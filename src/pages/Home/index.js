@@ -25,6 +25,7 @@ const Home = ({
   loadingWeather,
   fetchMarineWeather,
   loadingMarineWeather,
+  fetchTides,
   displaySampleData,
   stopLoading,
 }) => {
@@ -33,6 +34,7 @@ const Home = ({
     fetchWeather();
     if (!displaySampleData) {
       fetchMarineWeather();
+      fetchTides();
     }
     /** Demo mode : display sample data and stop loading */
     if (displaySampleData) {
@@ -103,6 +105,7 @@ Home.propTypes = {
   visibility: PropTypes.string.isRequired,
   fetchWeather: PropTypes.func.isRequired,
   fetchMarineWeather: PropTypes.func.isRequired,
+  fetchTides: PropTypes.func.isRequired,
   loadingWeather: PropTypes.bool.isRequired,
   loadingMarineWeather: PropTypes.bool.isRequired,
   displaySampleData: PropTypes.bool.isRequired,
