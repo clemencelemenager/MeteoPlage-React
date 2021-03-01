@@ -19,6 +19,7 @@ function weatherReducer(state = initialState, action = {}) {
         weatherIcon: action.weatherData.current.weather[0].icon,
         weatherText: action.weatherData.current.weather[0].description,
         temperature: action.weatherData.current.temp,
+        tempFeelsLike: action.weatherData.current.feels_like,
         loadingWeather: false,
       };
     }
