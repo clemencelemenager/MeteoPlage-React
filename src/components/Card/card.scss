@@ -109,18 +109,18 @@
     grid-column: 1/5;
     grid-row: 3/4;
     background-color: vars.$color-alternative;
-    font-size: 1.2rem;
+    font-size: 1rem;
     display: flex;
     flex-direction: column;
     .card-text p {
       padding:0;
       &.card-text-1{
-        font-size: 1.4rem;
+        font-size: 1.1rem;
         padding-bottom: 0.7rem;;
         font-weight: bold;
       }
       &.card-text-legend {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         padding-top: vars.$gutter;
         color: #561d1db3;
         align-items: center;
