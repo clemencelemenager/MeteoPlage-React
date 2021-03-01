@@ -7,7 +7,7 @@ import {
 const initialState = {
   latitude: 49.369682,
   longitude: -0.871084,
-  displaySampleData: false,
+  displaySampleData: true,
   responsiveMenu: false,
   windowWidth: window.innerWidth,
 };
