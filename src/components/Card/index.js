@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 /** Import assets */
 import './card.scss';
+/** Import utils */
+import { getTideStatus } from 'src/utils/tides';
 
 const Card = ({
   content,
@@ -23,7 +25,7 @@ const Card = ({
     <div className="card-text">
       {
         /** default display */
-        (content !== 'wind') && (
+        (content !== 'wind' && content !== 'tides') && (
           <p>{text}</p>
         )
       }
@@ -33,6 +35,18 @@ const Card = ({
           <>
             <p className="card-text-1">{text[0]}</p>
             <p className="card-text-2">{text[1]}</p>
+          </>
+        )
+      }
+      {
+        /** if tides content, display custom text */
+        (content === 'tides') && (
+          <>
+            <p className="card-text-1">
+              {getTideStatus(text[0])}, marée {text[0]} à {text[1]}
+            </p>
+            <p className="card-text-2">Prochaine marée {text[2]} à {text[3]}</p>
+            <p className="card-text-legend">Données de marée à NE PAS UTILISER POUR LA NAVIGATION</p>
           </>
         )
       }
@@ -56,7 +70,10 @@ Card.propTypes = {
     PropTypes.number,
     PropTypes.array,
   ]),
-  additionalText: PropTypes.string,
+  additionalText: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+  ]),
 };
 
 Card.defaultProps = {
