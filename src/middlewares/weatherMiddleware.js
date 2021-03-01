@@ -20,7 +20,7 @@ const weatherMiddleware = (store) => (next) => (action) => {
     case FETCH_WEATHER: {
       axios.get(`${fetchWeatherUrl}`)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           store.dispatch(saveWeather(response.data));
         })
         .catch((error) => {
