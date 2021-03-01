@@ -134,6 +134,12 @@
     @media (min-width: vars.$minWidthTablet) {
       grid-column: 1/9;
       grid-row: 2/4;
+      font-size: 1.2rem;
+      .card-text p {
+        &.card-text-1 {
+          font-size: 1.4rem;
+        }
+      }
     }
   }
 
