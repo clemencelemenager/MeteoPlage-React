@@ -7,9 +7,9 @@ export const fetchTides = () => ({
   type: FETCH_TIDES,
 });
 
-export const saveDailyTides = (tidesOfTheDay) => ({
+export const saveDailyTides = (nextTides) => ({
   type: SAVE_DAILY_TIDES,
-  tidesOfTheDay,
+  nextTides,
 });
 
 export const saveAllTides = (tidesData) => ({

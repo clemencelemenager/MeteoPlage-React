@@ -26,6 +26,11 @@ const Home = ({
   fetchMarineWeather,
   loadingMarineWeather,
   fetchTides,
+  firstNextTideState,
+  firstNextTideDatetime,
+  secondNextTideState,
+  secondNextTideDatetime,
+  loadingTides,
   displaySampleData,
   stopLoading,
 }) => {
@@ -38,7 +43,7 @@ const Home = ({
     }
     /** Demo mode : display sample data and stop loading */
     if (displaySampleData) {
-      console.warn('Chargement de données exemples');
+      console.warn('Demo mode : chargement de données exemples');
       stopLoading();
     }
   }, []);
@@ -46,10 +51,10 @@ const Home = ({
   return (
     <>
       {
-        (loadingWeather || loadingMarineWeather) && (<Loader />)
+        (loadingWeather || loadingMarineWeather || loadingTides) && (<Loader />)
       }
       {
-        (!loadingWeather && !loadingMarineWeather) && (
+        (!loadingWeather && !loadingMarineWeather && !loadingTides) && (
           <div className="home">
             <Location />
             <div className="card-container">
@@ -70,7 +75,14 @@ const Home = ({
               />
               <Card
                 content="tides"
-                text="Tides information - soon coming"
+                text={
+                  [
+                    firstNextTideState,
+                    firstNextTideDatetime,
+                    secondNextTideState,
+                    secondNextTideDatetime,
+                  ]
+                }
               />
               <Card
                 content="sea"
@@ -106,8 +118,13 @@ Home.propTypes = {
   fetchWeather: PropTypes.func.isRequired,
   fetchMarineWeather: PropTypes.func.isRequired,
   fetchTides: PropTypes.func.isRequired,
+  firstNextTideState: PropTypes.string.isRequired,
+  firstNextTideDatetime: PropTypes.string.isRequired,
+  secondNextTideState: PropTypes.string.isRequired,
+  secondNextTideDatetime: PropTypes.string.isRequired,
   loadingWeather: PropTypes.bool.isRequired,
   loadingMarineWeather: PropTypes.bool.isRequired,
+  loadingTides: PropTypes.bool.isRequired,
   displaySampleData: PropTypes.bool.isRequired,
   stopLoading: PropTypes.func.isRequired,
 };

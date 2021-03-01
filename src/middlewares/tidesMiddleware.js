@@ -22,9 +22,14 @@ const tidesMiddleware = (store) => (next) => (action) => {
     case FETCH_TIDES: {
       axios.get(`${fetchTidesUrl}`)
         .then((response) => {
-          console.log(response.data);
-          store.dispatch(saveDailyTides(response.data.extremes));
+          // console.log(response.data);
+          /** save next tides of the day */
+          // eslint-disable-next-line max-len
+          const nextTides = response.data.extremes.filter((tide) => tide.datetime > response.data.datetime);
+          store.dispatch(saveDailyTides(nextTides));
+          /** save all tides of the week */
           store.dispatch(saveAllTides(response.data.heights));
+          /** save location source of tides data */
           store.dispatch(saveOriginTides(response.data.origin));
         })
         .catch((error) => {

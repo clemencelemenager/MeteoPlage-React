@@ -1,6 +1,8 @@
 /** Import actions */
 import {
   SAVE_DAILY_TIDES,
+  SAVE_ALL_TIDES,
+  SAVE_ORIGIN_TIDES,
 } from 'src/actions/tides';
 import {
   STOP_LOADING,
@@ -34,11 +36,11 @@ const initialState = {
       state: 'HIGH TIDE',
     },
   ],
-  firstNextTideState: {
+  firstNextTide: {
     datetime: '2021-03-01T17:31:27+00:00',
     state: 'LOW TIDE',
   },
-  secondNextTideState: {
+  secondNextTide: {
     datetime: '2021-03-01T22:41:29+00:00',
     state: 'HIGH TIDE',
   },
@@ -130,8 +132,20 @@ function tidesReducer(state = initialState, action = {}) {
     case SAVE_DAILY_TIDES:
       return {
         ...state,
-        dailyTides: action.tidesOfTheDay,
+        dailyTides: action.nextTides,
+        firstNextTide: action.nextTides[0],
+        secondNextTide: action.nextTides[1],
         loadingTides: false,
+      };
+    case SAVE_ALL_TIDES:
+      return {
+        ...state,
+        allTides: action.tidesData,
+      };
+    case SAVE_ORIGIN_TIDES:
+      return {
+        ...state,
+        originTidesData: action.origin,
       };
     case STOP_LOADING:
       return {
