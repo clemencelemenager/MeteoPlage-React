@@ -13,7 +13,6 @@ const initialState = {
   windDirection: 0, // in degrees
   seaTemperature: 0,
   waveHeight: 0,
-  visibility: 0,
   // dataPerHour: [], // data per hour of the day
   loadingMarineWeather: true,
 };

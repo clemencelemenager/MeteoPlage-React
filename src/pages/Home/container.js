@@ -30,13 +30,13 @@ const mapStateToProps = (state) => ({
   weatherText: capitalizeFirstLetter(state.weather.weatherText),
   temperature: `${Math.round(state.weather.temperature)}°`,
   tempFeelsLike: `${Math.round(state.weather.tempFeelsLike)}°`,
+  visibility: getVisibilityText(state.weather.visibility),
   loadingWeather: state.weather.loadingWeather,
   wind: `${getKmhSpeed(state.marineWeather.wind)} km/h`,
   gust: `${getKmhSpeed(state.marineWeather.gust)} km/h`,
   windDirection: getCardinalDirection(state.marineWeather.windDirection),
   waveHeight: getWaveDescription(state.marineWeather.waveHeight),
   seaTemperature: `${Math.round(state.marineWeather.seaTemperature)}°`,
-  visibility: getVisibilityText(state.marineWeather.visibility),
   loadingMarineWeather: state.marineWeather.loadingMarineWeather,
 });
 
