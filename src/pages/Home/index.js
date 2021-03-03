@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 /** Import components */
 import Card from 'src/components/Card';
-import Location from 'src/components/Location';
+import Location from 'src/components/Location/container';
 import Loader from 'src/components/Loader';
 
 /** Import assets */
@@ -34,7 +34,7 @@ const Home = ({
   displaySampleData,
   stopLoading,
 }) => {
-  /** Load data */
+  /** Load data after first loading */
   useEffect(() => {
     fetchWeather();
     if (!displaySampleData) {
