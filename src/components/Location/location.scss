@@ -2,11 +2,58 @@
 
 .location {
   text-align: center;
-  font-weight: bold;
-  margin: vars.$gutter;
-  font-family: vars.$fontTitle;
-  font-size: vars.$sizeTitle;
-  i {
-    padding-right: vars.$gutter/2;
+  margin: vars.$gutter 0;
+  .city {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    font-weight: bold;
+    font-family: vars.$fontTitle;
+    font-size: vars.$sizeTitle;
+    margin-bottom: vars.$gutter/2;
+  }
+  .region {
+    color: #999;
+    font-style: italic;
+  }
+  .location-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: vars.$gutter/2 0;
+    input {
+      border:1px solid #cccccc80;
+      padding: vars.$gutter/2;
+      font-size: 1.1rem;
+      font-family: vars.$fontTitle;
+      width: 100%;
+      max-width: 500px;
+      height: 35px;
+    }
+    button.buttonReset {
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      margin: 0;
+    }
+  }
+  i.edit {
+    font-size: 1.3rem;
+    color: #cccccc80;
+    padding-left: vars.$gutter;
+    cursor: pointer;
+  }
+  i.confirm,
+  i.cancel {
+    font-size: 2.5rem;
+    padding-left: 0.5rem;
+    cursor: pointer;
+  }
+  i.confirm {
+    color: #a2e24f;
+  }
+  i.cancel {
+    color: #cccccc;
   }
 }

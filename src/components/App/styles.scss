@@ -1,7 +1,7 @@
 @use 'src/styles/_vars';
 
 .app {
-  margin: vars.$gutter;
+  margin: 0 vars.$gutter;
   min-height: 80vh;
 
   // For Tablets & up
