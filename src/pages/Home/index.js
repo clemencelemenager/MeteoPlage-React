@@ -91,6 +91,15 @@ const Home = ({
                   />
                 )
               }
+              {
+                /** if tides origin not close enough, display a message */
+                (originTidesDataDistance >= 10) && (
+                  <Card
+                    content="noTides-message"
+                    additionalText="Il n'y a pas d'information de marée disponible pour votre position."
+                  />
+                )
+              }
               <Card
                 content="sea"
                 text={waveHeight}
