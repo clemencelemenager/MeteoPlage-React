@@ -121,7 +121,7 @@ const initialState = {
   originTidesData: {
     latitude: 49.375,
     longitude: -0.8125,
-    distance: 14.3,
+    distance: 4.3,
     unit: 'km',
   },
   loadingTides: true,

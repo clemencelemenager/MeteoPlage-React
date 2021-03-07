@@ -31,6 +31,10 @@ const tidesMiddleware = (store) => (next) => (action) => {
           store.dispatch(saveAllTides(response.data.heights));
           /** save location source of tides data */
           store.dispatch(saveOriginTides(response.data.origin));
+          /** save data in local storage */
+          localStorage.setItem('tidesOfTheDay', nextTides);
+          localStorage.setItem('allTides', response.data.heights);
+          localStorage.setItem('tidesOrigin', response.data.origin);
         })
         .catch((error) => {
           console.log(error);

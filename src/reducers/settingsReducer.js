@@ -54,8 +54,8 @@ function settingsReducer(state = initialState, action = {}) {
         ...state,
         latitude: action.latitude,
         longitude: action.longitude,
-        region: action.region,
         city: action.city,
+        region: action.region,
       };
     default:
       return state;

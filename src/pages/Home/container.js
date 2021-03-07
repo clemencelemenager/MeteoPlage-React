@@ -22,11 +22,10 @@ import {
 } from 'src/utils/tides';
 
 /** Import actions */
-import { stopLoading } from 'src/actions/settings';
+import { stopLoading, saveCoordinates } from 'src/actions/settings';
 import { fetchWeather } from 'src/actions/weather';
 import { fetchMarineWeather } from 'src/actions/marineWeather';
 import { fetchTides } from 'src/actions/tides';
-import { StaticRouter } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
   // state from settings reducer
@@ -69,6 +68,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   stopLoading: () => {
     dispatch(stopLoading());
+  },
+  saveCoordinates: (latitude, longitude, city, region) => {
+    dispatch(saveCoordinates(latitude, longitude, city, region));
   },
 });
 

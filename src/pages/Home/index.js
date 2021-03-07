@@ -11,6 +11,8 @@ import Loader from 'src/components/Loader';
 import './home.scss';
 
 const Home = ({
+  latitude,
+  longitude,
   weatherIcon,
   weatherText,
   temperature,
@@ -34,12 +36,27 @@ const Home = ({
   loadingTides,
   displaySampleData,
   stopLoading,
+  saveCoordinates,
 }) => {
   /** Load data after first loading */
   useEffect(() => {
+    /** if visitor came recently, get its last location from local storage */
+    console.log(localStorage.getItem('location'));
+    if (localStorage.getItem('location') !== null) {
+      const lastLatitude = JSON.parse(localStorage.getItem('location')).newLatitude;
+      const lastLongitude = JSON.parse(localStorage.getItem('location')).newLongitude;
+      const lastRegion = JSON.parse(localStorage.getItem('location')).newRegion;
+      const lastCity = JSON.parse(localStorage.getItem('location')).newCity;
+      saveCoordinates(lastLatitude, lastLongitude, lastCity, lastRegion);
+    }
     fetchWeather();
     if (!displaySampleData) {
       fetchMarineWeather();
+      /** if visitor came recently for same location, use tides information from local storage */
+      if (latitude === localStorage.getItem('latitude') && longitude === localStorage.getItem('longitude')) {
+        // TODO
+      }
+      /** ...else fetch API */
       fetchTides();
     }
     /** Demo mode : display sample data and stop loading */
@@ -121,6 +138,14 @@ const Home = ({
 };
 
 Home.propTypes = {
+  latitude: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
+  longitude: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
   weatherIcon: PropTypes.string.isRequired,
   weatherText: PropTypes.string.isRequired,
   temperature: PropTypes.string.isRequired,
@@ -144,6 +169,7 @@ Home.propTypes = {
   loadingTides: PropTypes.bool.isRequired,
   displaySampleData: PropTypes.bool.isRequired,
   stopLoading: PropTypes.func.isRequired,
+  saveCoordinates: PropTypes.func.isRequired,
 };
 
 Home.defaultProps = {

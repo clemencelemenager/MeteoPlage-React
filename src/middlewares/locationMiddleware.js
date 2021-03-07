@@ -31,6 +31,13 @@ const locationMiddleware = (store) => (next) => (action) => {
             store.dispatch(fetchTides());
             store.dispatch(fetchMarineWeather());
           }
+          /** save data in local storage */
+          const dateOfRequest = new Date();
+          localStorage.removeItem('location');
+          const LocationForLocalStorage = JSON.stringify({
+            newCity, newLatitude, newLongitude, newRegion, dateOfRequest,
+          });
+          localStorage.setItem('location', LocationForLocalStorage);
         })
         .catch((error) => {
           console.log(error);

@@ -6,6 +6,7 @@ export const TOGGLE_EDIT_CITY = 'TOGGLE_EDIT_CITY';
 export const SAVE_CITY = 'SAVE_CITY';
 export const FETCH_COORDINATES = 'FETCH_COORDINATES';
 export const SAVE_COORDINATES = 'SAVE_COORDINATES';
+export const UPDATE_SETTINGS = 'UPDATE_SETTINGS';
 
 export const stopLoading = () => ({
   type: STOP_LOADING,
