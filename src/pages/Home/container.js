@@ -26,6 +26,7 @@ import { stopLoading } from 'src/actions/settings';
 import { fetchWeather } from 'src/actions/weather';
 import { fetchMarineWeather } from 'src/actions/marineWeather';
 import { fetchTides } from 'src/actions/tides';
+import { StaticRouter } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
   // state from settings reducer
@@ -51,8 +52,8 @@ const mapStateToProps = (state) => ({
   firstNextTideDatetime: getTideTime(state.tides.firstNextTide.datetime),
   secondNextTideState: translateTideType(state.tides.secondNextTide.state),
   secondNextTideDatetime: getTideTime(state.tides.secondNextTide.datetime),
-
   secondNextTide: state.tides.secondNextTide,
+  originTidesDataDistance: state.tides.originTidesData.distance,
   loadingTides: state.tides.loadingTides,
 });
 

@@ -8,16 +8,16 @@ import { fetchMarineWeather } from 'src/actions/marineWeather';
 import { fetchTides } from 'src/actions/tides';
 
 const locationMiddleware = (store) => (next) => (action) => {
+  /** Prepare data to fetch coordinates from city input */
   const {
     city,
     displaySampleData,
   } = store.getState().settings;
-
-  const fetchCoordinatesUrl = `https://api-adresse.data.gouv.fr/search/?q=${city}&type=municipality&autocomplete=1`;
+  const fetchCoordinatesFromCityUrl = `https://api-adresse.data.gouv.fr/search/?q=${city}&type=municipality&autocomplete=1`;
 
   switch (action.type) {
     case FETCH_COORDINATES: {
-      axios.get(`${fetchCoordinatesUrl}`)
+      axios.get(`${fetchCoordinatesFromCityUrl}`)
         .then((response) => {
           // console.log(response.data);
           const newCity = response.data.features[0].properties.city;

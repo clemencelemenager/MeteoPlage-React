@@ -46,7 +46,7 @@ const Card = ({
               {getTideStatus(text[0])}, marée {text[0]} à {text[1]}
             </p>
             <p className="card-text-2">Prochaine marée {text[2]} à {text[3]}</p>
-            <p className="card-text-legend">NE PAS UTILISER POUR LA NAVIGATION</p>
+            <p className="card-text-legend">Info marée à {text[4]}km, NE PAS UTILISER POUR LA NAVIGATION</p>
           </>
         )
       }

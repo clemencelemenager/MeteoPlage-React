@@ -30,6 +30,7 @@ const Home = ({
   firstNextTideDatetime,
   secondNextTideState,
   secondNextTideDatetime,
+  originTidesDataDistance,
   loadingTides,
   displaySampleData,
   stopLoading,
@@ -73,17 +74,23 @@ const Home = ({
                 text={[wind, gust]}
                 additionalText={windDirection}
               />
-              <Card
-                content="tides"
-                text={
-                  [
-                    firstNextTideState,
-                    firstNextTideDatetime,
-                    secondNextTideState,
-                    secondNextTideDatetime,
-                  ]
-                }
-              />
+              {
+                /** if tides origin close enough, display tides */
+                (originTidesDataDistance < 10) && (
+                  <Card
+                    content="tides"
+                    text={
+                      [
+                        firstNextTideState,
+                        firstNextTideDatetime,
+                        secondNextTideState,
+                        secondNextTideDatetime,
+                        originTidesDataDistance,
+                      ]
+                    }
+                  />
+                )
+              }
               <Card
                 content="sea"
                 text={waveHeight}
@@ -124,6 +131,7 @@ Home.propTypes = {
   secondNextTideDatetime: PropTypes.string.isRequired,
   loadingWeather: PropTypes.bool.isRequired,
   loadingMarineWeather: PropTypes.bool.isRequired,
+  originTidesDataDistance: PropTypes.number.isRequired,
   loadingTides: PropTypes.bool.isRequired,
   displaySampleData: PropTypes.bool.isRequired,
   stopLoading: PropTypes.func.isRequired,

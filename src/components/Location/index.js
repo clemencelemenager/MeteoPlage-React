@@ -33,19 +33,26 @@ const Location = ({
     <div className="location">
       <div className="city">
         {city}
-        {!editCity && (
-          <i
-            className="fas fa-pen edit"
-            onClick={handleEditButton}
-          />
-        )}
+        {
+          /** Display edit button when not editing location */
+          !editCity && (
+            <i
+              className="fas fa-pen edit"
+              onClick={handleEditButton}
+            />
+          )
+        }
       </div>
-      {!editCity && (
-        <div className="region">
-          {region}
-        </div>
-      )}
       {
+        /** Display region only when not editing location */
+        !editCity && (
+          <div className="region">
+            {region}
+          </div>
+        )
+      }
+      {
+        /** Display search input when editing the location */
         editCity && (
           <form autoComplete="on" className="location-edit" onSubmit={handleSubmitCity}>
             <input
