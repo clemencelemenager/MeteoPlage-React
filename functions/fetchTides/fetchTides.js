@@ -8,7 +8,7 @@ const handler = async (event) => {
   /** Get secret api key */
   const { REACT_APP_API_TIDES_KEY } = process.env;
   /** Set endpoint for axios request */
-  const tidesUrl = `https://tides.p.rapidapi.com/tides?latitude=${latitude}&longitude=${longitude}&interval=60&duration=1440&radius=10`;
+  const tidesUrl = `https://tides.p.rapidapi.com/tides?latitude=${latitude}&longitude=${longitude}&interval=60&duration=10080&radius=10`;
 
   /** Launch request */
   try {

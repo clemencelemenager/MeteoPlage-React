@@ -35,12 +35,14 @@ The following API are used in this web application :
 - **Open Weather Map** : weather icon and description, temperature | [API Documentation](https://openweathermap.org/api/one-call-api)
 - **Tides** : timetable for tides, not to use for navigational purpose | [API Documentation](https://rapidapi.com/apihood/api/tides/endpoints)
 - **StormGlass** : marine weather (wind, sea temperature, wave height) | [API Documentation](https://docs.stormglass.io/#/weather)
+- **Geo.API.gouv.data** : search latitude and longitude from city name - France only | [API Documentation](https://geo.api.gouv.fr/adresse)
 
 > Information about number of requests included in free plans :
 >
 > - API OpenWeatherMap : 60 calls/minute, 1.000.000 calls/month
 > - API Tides : 100 calls/month
 > - API StormGlass : 50 calls/day
+> - API adress : 50 calls/sec & /IP
 
 ### Demo mode
 

@@ -22,16 +22,17 @@ import {
 } from 'src/utils/tides';
 
 /** Import actions */
-import { stopLoading } from 'src/actions/settings';
+import { stopLoading, saveCoordinates } from 'src/actions/settings';
 import { fetchWeather } from 'src/actions/weather';
 import { fetchMarineWeather } from 'src/actions/marineWeather';
-import { fetchTides } from 'src/actions/tides';
+import { fetchTides, saveDailyTides } from 'src/actions/tides';
 
 const mapStateToProps = (state) => ({
   // state from settings reducer
   displaySampleData: state.settings.displaySampleData,
   latitude: state.settings.latitude,
   longitude: state.settings.longitude,
+  city: state.settings.city,
   // state from weather reducer
   weatherIcon: getWeatherIconUrl(state.weather.weatherIcon),
   weatherText: capitalizeFirstLetter(state.weather.weatherText),
@@ -51,8 +52,8 @@ const mapStateToProps = (state) => ({
   firstNextTideDatetime: getTideTime(state.tides.firstNextTide.datetime),
   secondNextTideState: translateTideType(state.tides.secondNextTide.state),
   secondNextTideDatetime: getTideTime(state.tides.secondNextTide.datetime),
-
   secondNextTide: state.tides.secondNextTide,
+  originTidesDataDistance: state.tides.originTidesData.distance,
   loadingTides: state.tides.loadingTides,
 });
 
@@ -68,6 +69,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   stopLoading: () => {
     dispatch(stopLoading());
+  },
+  saveCoordinates: (latitude, longitude, city, region) => {
+    dispatch(saveCoordinates(latitude, longitude, city, region));
+  },
+  saveDailyTides: (nextTides) => {
+    dispatch(saveDailyTides(nextTides));
   },
 });
 

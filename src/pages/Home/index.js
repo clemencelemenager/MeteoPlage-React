@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 
 /** Import components */
 import Card from 'src/components/Card';
-import Location from 'src/components/Location';
+import Location from 'src/components/Location/container';
 import Loader from 'src/components/Loader';
 
 /** Import assets */
 import './home.scss';
+import { truncateNow } from 'src/utils/tides';
 
 const Home = ({
+  city,
   weatherIcon,
   weatherText,
   temperature,
@@ -30,17 +32,51 @@ const Home = ({
   firstNextTideDatetime,
   secondNextTideState,
   secondNextTideDatetime,
+  originTidesDataDistance,
   loadingTides,
   displaySampleData,
   stopLoading,
+  saveCoordinates,
+  saveDailyTides,
 }) => {
-  /** Load data */
+  /** Load data after first loading */
   useEffect(() => {
+    /** if visitor came recently, get its last searched location from local storage */
+    if (localStorage.getItem('location') !== null) {
+      // console.log(JSON.parse(localStorage.getItem('location')));
+      const lastLatitude = JSON.parse(localStorage.getItem('location')).newLatitude;
+      const lastLongitude = JSON.parse(localStorage.getItem('location')).newLongitude;
+      const lastRegion = JSON.parse(localStorage.getItem('location')).newRegion;
+      const lastCity = JSON.parse(localStorage.getItem('location')).newCity;
+      saveCoordinates(lastLatitude, lastLongitude, lastCity, lastRegion);
+    }
+    /** Get weather data from API */
     fetchWeather();
+
     if (!displaySampleData) {
       fetchMarineWeather();
-      fetchTides();
+
+      /** if visitor already came recently for same location, use local storage for tides */
+      if (localStorage.getItem('tides') !== null) {
+        // console.log(JSON.parse(localStorage.getItem('tides')));
+        const now = truncateNow(Date.now());
+        const { nextTides } = JSON.parse(localStorage.getItem('tides'));
+        const updatedNextTides = nextTides.filter((tide) => tide.timestamp > now);
+        const cityLastRequestTides = JSON.parse(localStorage.getItem('tides')).city;
+        if (updatedNextTides.length > 0 && cityLastRequestTides === city) {
+          saveDailyTides(updatedNextTides);
+        }
+        /** ...else fetch API */
+        else {
+          fetchTides();
+        }
+      }
+      /** ...else fetch API */
+      else {
+        fetchTides();
+      }
     }
+
     /** Demo mode : display sample data and stop loading */
     if (displaySampleData) {
       console.warn('Demo mode : chargement de données exemples');
@@ -73,17 +109,32 @@ const Home = ({
                 text={[wind, gust]}
                 additionalText={windDirection}
               />
-              <Card
-                content="tides"
-                text={
-                  [
-                    firstNextTideState,
-                    firstNextTideDatetime,
-                    secondNextTideState,
-                    secondNextTideDatetime,
-                  ]
-                }
-              />
+              {
+                /** if tides origin close enough, display tides */
+                (originTidesDataDistance < 10) && (
+                  <Card
+                    content="tides"
+                    text={
+                      [
+                        firstNextTideState,
+                        firstNextTideDatetime,
+                        secondNextTideState,
+                        secondNextTideDatetime,
+                        originTidesDataDistance,
+                      ]
+                    }
+                  />
+                )
+              }
+              {
+                /** if tides origin not close enough, display a message */
+                (originTidesDataDistance >= 10) && (
+                  <Card
+                    content="noTides-message"
+                    additionalText="Il n'y a pas d'information de marée disponible pour votre position."
+                  />
+                )
+              }
               <Card
                 content="sea"
                 text={waveHeight}
@@ -105,6 +156,7 @@ const Home = ({
 };
 
 Home.propTypes = {
+  city: PropTypes.string.isRequired,
   weatherIcon: PropTypes.string.isRequired,
   weatherText: PropTypes.string.isRequired,
   temperature: PropTypes.string.isRequired,
@@ -124,9 +176,12 @@ Home.propTypes = {
   secondNextTideDatetime: PropTypes.string.isRequired,
   loadingWeather: PropTypes.bool.isRequired,
   loadingMarineWeather: PropTypes.bool.isRequired,
+  originTidesDataDistance: PropTypes.number.isRequired,
   loadingTides: PropTypes.bool.isRequired,
   displaySampleData: PropTypes.bool.isRequired,
   stopLoading: PropTypes.func.isRequired,
+  saveCoordinates: PropTypes.func.isRequired,
+  saveDailyTides: PropTypes.func.isRequired,
 };
 
 Home.defaultProps = {
