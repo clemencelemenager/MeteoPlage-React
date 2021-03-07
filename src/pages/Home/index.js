@@ -56,14 +56,20 @@ const Home = ({
     if (!displaySampleData) {
       fetchMarineWeather();
 
-      /** if visitor already came today for same location, use local storage for tides */
-      // console.log(JSON.parse(localStorage.getItem('tides')));
-      const now = truncateNow(Date.now());
-      const { nextTides } = JSON.parse(localStorage.getItem('tides'));
-      const updatedNextTides = nextTides.filter((tide) => tide.timestamp > now);
-      const cityLastRequestTides = JSON.parse(localStorage.getItem('tides')).city;
-      if (updatedNextTides.length > 0 && cityLastRequestTides === city) {
-        saveDailyTides(updatedNextTides);
+      /** if visitor already came recently for same location, use local storage for tides */
+      if (localStorage.getItem('tides') !== null) {
+        // console.log(JSON.parse(localStorage.getItem('tides')));
+        const now = truncateNow(Date.now());
+        const { nextTides } = JSON.parse(localStorage.getItem('tides'));
+        const updatedNextTides = nextTides.filter((tide) => tide.timestamp > now);
+        const cityLastRequestTides = JSON.parse(localStorage.getItem('tides')).city;
+        if (updatedNextTides.length > 0 && cityLastRequestTides === city) {
+          saveDailyTides(updatedNextTides);
+        }
+        /** ...else fetch API */
+        else {
+          fetchTides();
+        }
       }
       /** ...else fetch API */
       else {
