@@ -44,3 +44,14 @@ export const getTideTime = (date) => {
   }
   return `${hour}:${minute}`;
 };
+
+/**
+ * Get unix timestamp for now
+ * Truncate the last 3 numbers of unix timestamp date to correspond with tides API format
+ */
+export const truncateNow = (now) => {
+  const nowString = now.toString();
+  const nowTrunc = nowString.substring(0, 10);
+  const nowTruncInt = parseInt(nowTrunc, 10);
+  return nowTruncInt;
+};

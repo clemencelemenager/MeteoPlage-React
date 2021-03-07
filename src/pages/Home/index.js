@@ -9,10 +9,10 @@ import Loader from 'src/components/Loader';
 
 /** Import assets */
 import './home.scss';
+import { truncateNow } from 'src/utils/tides';
 
 const Home = ({
-  latitude,
-  longitude,
+  city,
   weatherIcon,
   weatherText,
   temperature,
@@ -37,28 +37,40 @@ const Home = ({
   displaySampleData,
   stopLoading,
   saveCoordinates,
+  saveDailyTides,
 }) => {
   /** Load data after first loading */
   useEffect(() => {
-    /** if visitor came recently, get its last location from local storage */
-    console.log(localStorage.getItem('location'));
+    /** if visitor came recently, get its last searched location from local storage */
     if (localStorage.getItem('location') !== null) {
+      // console.log(JSON.parse(localStorage.getItem('location')));
       const lastLatitude = JSON.parse(localStorage.getItem('location')).newLatitude;
       const lastLongitude = JSON.parse(localStorage.getItem('location')).newLongitude;
       const lastRegion = JSON.parse(localStorage.getItem('location')).newRegion;
       const lastCity = JSON.parse(localStorage.getItem('location')).newCity;
       saveCoordinates(lastLatitude, lastLongitude, lastCity, lastRegion);
     }
+    /** Get weather data from API */
     fetchWeather();
+
     if (!displaySampleData) {
       fetchMarineWeather();
-      /** if visitor came recently for same location, use tides information from local storage */
-      if (latitude === localStorage.getItem('latitude') && longitude === localStorage.getItem('longitude')) {
-        // TODO
+
+      /** if visitor already came today for same location, use local storage for tides */
+      // console.log(JSON.parse(localStorage.getItem('tides')));
+      const now = truncateNow(Date.now());
+      const { nextTides } = JSON.parse(localStorage.getItem('tides'));
+      const updatedNextTides = nextTides.filter((tide) => tide.timestamp > now);
+      const cityLastRequestTides = JSON.parse(localStorage.getItem('tides')).city;
+      if (updatedNextTides.length > 0 && cityLastRequestTides === city) {
+        saveDailyTides(updatedNextTides);
       }
       /** ...else fetch API */
-      fetchTides();
+      else {
+        fetchTides();
+      }
     }
+
     /** Demo mode : display sample data and stop loading */
     if (displaySampleData) {
       console.warn('Demo mode : chargement de données exemples');
@@ -138,14 +150,7 @@ const Home = ({
 };
 
 Home.propTypes = {
-  latitude: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]).isRequired,
-  longitude: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]).isRequired,
+  city: PropTypes.string.isRequired,
   weatherIcon: PropTypes.string.isRequired,
   weatherText: PropTypes.string.isRequired,
   temperature: PropTypes.string.isRequired,
@@ -170,6 +175,7 @@ Home.propTypes = {
   displaySampleData: PropTypes.bool.isRequired,
   stopLoading: PropTypes.func.isRequired,
   saveCoordinates: PropTypes.func.isRequired,
+  saveDailyTides: PropTypes.func.isRequired,
 };
 
 Home.defaultProps = {

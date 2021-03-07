@@ -34,10 +34,10 @@ const locationMiddleware = (store) => (next) => (action) => {
           /** save data in local storage */
           const dateOfRequest = new Date();
           localStorage.removeItem('location');
-          const LocationForLocalStorage = JSON.stringify({
+          const locationForLocalStorage = JSON.stringify({
             newCity, newLatitude, newLongitude, newRegion, dateOfRequest,
           });
-          localStorage.setItem('location', LocationForLocalStorage);
+          localStorage.setItem('location', locationForLocalStorage);
         })
         .catch((error) => {
           console.log(error);

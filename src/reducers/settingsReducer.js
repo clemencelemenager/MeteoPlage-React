@@ -15,7 +15,7 @@ const initialState = {
   region: '14, Calvados, Normandie',
   inputCity: '',
   editCity: false,
-  displaySampleData: true,
+  displaySampleData: false,
   responsiveMenu: false,
   windowWidth: window.innerWidth,
 };
